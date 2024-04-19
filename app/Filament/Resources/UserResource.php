@@ -37,7 +37,7 @@ class UserResource extends Resource
             ])
             ->actions([
                 Tables\Actions\Action::make('go_chat')
-                    ->label('Чат')
+                    ->label('Chat')
                     ->icon('heroicon-o-chat-bubble-left-right')
                     ->visible(fn (User $record) => $record->id !== Auth::id())
                     ->action(
