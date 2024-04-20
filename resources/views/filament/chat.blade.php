@@ -2,9 +2,10 @@
     <div
         class="relative max-h-[45%]"
         x-init="
-            window.Echo.private('{{ $channelName }}')
+            Echo.private('{{ $channelName }}')
                 .listen('.message', (e) => { @this.call('incomingMessage', e) })
-            ">
+            "
+    >
 
         <div id="messages"
              class="relative h-[60vh] overflow-y-auto bg-white rounded-lg shadow-md p-6 scroll-smooth dark:bg-gray-900 dark:ring-white/10"

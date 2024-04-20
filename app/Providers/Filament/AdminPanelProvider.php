@@ -54,7 +54,6 @@ class AdminPanelProvider extends PanelProvider
             ->authMiddleware([
                 Authenticate::class,
             ])
-            ->viteTheme('resources/css/filament/theme.css')
             ->renderHook(
                 PanelsRenderHook::SIDEBAR_NAV_END,
                 fn (): string => Vite::useHotFile('hot')

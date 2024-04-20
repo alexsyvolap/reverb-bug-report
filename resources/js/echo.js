@@ -1,25 +1,5 @@
-import Echo from 'laravel-echo';
-import Pusher from 'pusher-js';
-
-window.Pusher = Pusher;
-
-window.Echo = new Echo({
-    broadcaster: 'reverb',
-    key: import.meta.env.VITE_REVERB_APP_KEY,
-    wsHost: import.meta.env.VITE_REVERB_HOST,
-    wsPort: import.meta.env.VITE_REVERB_PORT ?? 80,
-    wssPort: import.meta.env.VITE_REVERB_PORT ?? 443,
-    forceTLS: (import.meta.env.VITE_REVERB_SCHEME ?? 'https') === 'https',
-    enabledTransports: ['ws', 'wss'],
-    auth: {
-        headers: {
-            Accept: 'application/json',
-        },
-    },
-});
-
-window.Echo.connector.pusher.connection.bind('connected', () => {
-    window.Echo.private('admin.all.chats')
+window.onload = function () {
+    Echo.private('admin.all.chats')
         .listen('.message', (e) => {
             const message = e.message;
             const pathname = window.location.pathname;
@@ -48,9 +28,4 @@ window.Echo.connector.pusher.connection.bind('connected', () => {
                 ])
                 .send();
         });
-});
-
-window.Echo.connector.pusher.connection.bind('disconnected', () => {
-    console.log('disconnected');
-    window.Echo.leave('admin.all.chats');
-});
+};
